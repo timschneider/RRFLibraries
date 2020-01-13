@@ -29,7 +29,7 @@ TOOLCHAIN=gcc
 #-------------------------------------------------------------------------------
 
 # Output directories
-OUTPUT_BIN = ../../..
+OUTPUT_BIN = ../../../SAM4E_RTOS
 
 # Libraries
 PROJECT_BASE_PATH = ../../..
@@ -45,7 +45,7 @@ VARIANT_PATH = ../../../variants/$(VARIANT)
 
 #vpath %.h $(PROJECT_BASE_PATH) $(SYSTEM_PATH) $(VARIANT_PATH)
 
-#VPATH+=$(PROJECT_BASE_PATH)
+VPATH+=$(PROJECT_BASE_PATH)
 
 INCLUDES =
 #INCLUDES += -I$(PROJECT_BASE_PATH)
@@ -186,7 +186,7 @@ $(addprefix $(OUTPUT_PATH)/,$(A_OBJ)): $(OUTPUT_PATH)/%.o: %.s
 	@"$(AS)" -c $(ASFLAGS) $< -o $@
 
 $(OUTPUT_LIB): $(addprefix $(OUTPUT_PATH)/, $(C_OBJ)) $(addprefix $(OUTPUT_PATH)/, $(CPP_OBJ)) $(addprefix $(OUTPUT_PATH)/, $(A_OBJ))
-	#@mkdir -p $(OUTPUT_BIN)
+	@mkdir -p $(OUTPUT_BIN)
 	@"$(AR)" -v -r "$(OUTPUT_BIN)/$@" $^
 	@"$(NM)" "$(OUTPUT_BIN)/$@" > "$(OUTPUT_BIN)/$@.txt"
 
