@@ -23,6 +23,8 @@ jobs:
         echo "::set-env name=ARM_GCC_TOOLCHAIN::$ARM_GCC_TOOLCHAIN"
     - name: setup dependencies
       run: |
+        # walk one level up
+        cd ..
         git clone https://github.com/timschneider/CoreNG.git
         cd CoreNG
         git checkout origin/dev
@@ -32,6 +34,8 @@ jobs:
         # we should be on master already
         git status
         cd ..
+        ls -la
+        cd RRFLibraries
     - name: make
       working-directory: ./variants/duetNG/build_gcc 
       run: |
