@@ -41,4 +41,9 @@ jobs:
       run: |
         echo "ARM Cross Compiler: $ARM_GCC_TOOLCHAIN"
         make
+    - name: upload libraries
+      uses: actions/upload-artifact@v1
+      with:
+        name: SAM4E_RTOS-libRRFLibraries
+        path: SAM4E_RTOS/libRRFLibraries.a
         
