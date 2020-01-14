@@ -1,0 +1,22 @@
+name: C/C++ CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup cross build environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install build-essential
+        wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/9-2019q4/RC2.1/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2 >/dev/null 2>&1
+        tar -xf gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2
+        export ARM_GCC_TOOLCHAIN="${PWD}/gcc-arm-none-eabi-9-2019-q4-major/bin"
+        export PATH="$ARM_GCC_TOOLCHAIN:$PATH"
+    - name: make
+      working-directory: ./variants/duetNG/build_gcc 
+      run: make
